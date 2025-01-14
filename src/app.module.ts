@@ -8,7 +8,10 @@ import { Campaign } from './campaign/entity/campaign.entity';
 @Module({
   imports: [
     // 글로벌 설정으로 .env 파일 읽기
-    ConfigModule.forRoot({ isGlobal: true }),
+    ConfigModule.forRoot({
+      envFilePath: [`.env.${process.env.NODE_ENV}`, '.env'], // NODE_ENV 값이 없으면 기본 .env 로드
+      isGlobal: true 
+    }),
 
     // TypeORM 연결 설정
     TypeOrmModule.forRoot({
